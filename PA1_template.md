@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 
 ## Loading and preprocessing the data
 
@@ -12,26 +17,6 @@ df$interval <- factor(df$interval)
 
 ```r
 library(dplyr, verbose=FALSE)
-```
-
-```
-## Warning: package 'dplyr' was built under R version 3.1.2
-```
-
-```
-## 
-## Attaching package: 'dplyr'
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-```
-
-```r
 library(xtable, verbose=FALSE)
 ```
 
@@ -46,7 +31,7 @@ print(xt, type="html")
 ```
 
 <!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
-<!-- Mon Feb 16 22:32:33 2015 -->
+<!-- Fri Feb 20 17:28:31 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> steps </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 37.38 </td> </tr>
@@ -60,7 +45,7 @@ print(xtable(summary_per_day), type="html")
 ```
 
 <!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
-<!-- Mon Feb 16 22:32:33 2015 -->
+<!-- Fri Feb 20 17:28:31 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> date </th> <th> steps </th>  </tr>
   <tr> <td align="right"> 1 </td> <td> 2012-10-01 </td> <td align="right">  </td> </tr>
@@ -137,7 +122,7 @@ ggplot(summary_per_day, aes(date, steps)) + geom_bar(stat="identity") + theme(ax
 ## Warning: Removed 8 rows containing missing values (position_stack).
 ```
 
-![](./PA1_template_files/figure-html/hist_per_day-1.png) 
+![plot of chunk hist_per_day](figure/hist_per_day-1.png) 
 
 ### Calculate and report the mean and median of the total number of steps taken per day
 
@@ -147,7 +132,7 @@ print(xtable(summary), type="html")
 ```
 
 <!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
-<!-- Mon Feb 16 22:32:35 2015 -->
+<!-- Fri Feb 20 17:28:33 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> mean </th> <th> median </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 10766.19 </td> <td align="right"> 10765 </td> </tr>
@@ -164,7 +149,7 @@ tsdata <- na.omit(df) %>% group_by(interval) %>% summarize(ave_steps=mean(steps)
 plot(tsdata$interval, tsdata$ave_steps, type="l")
 ```
 
-![](./PA1_template_files/figure-html/tsplot-1.png) 
+![plot of chunk tsplot](figure/tsplot-1.png) 
 
 ### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -174,7 +159,7 @@ print(xtable(interval_row), type="html")
 ```
 
 <!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
-<!-- Mon Feb 16 22:32:36 2015 -->
+<!-- Fri Feb 20 17:28:34 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> interval </th> <th> ave_steps </th>  </tr>
   <tr> <td align="right"> 1 </td> <td> 835 </td> <td align="right"> 206.17 </td> </tr>
@@ -221,7 +206,7 @@ summary_per_day_with_imputed <- group_by(df2, date) %>% summarize(steps=sum(step
 ggplot(summary_per_day_with_imputed, aes(date, steps)) + geom_bar(stat="identity") + theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-![](./PA1_template_files/figure-html/hist_with_imputed-1.png) 
+![plot of chunk hist_with_imputed](figure/hist_with_imputed-1.png) 
 
 The mean and median total number of steps taken each day.
 
@@ -231,7 +216,7 @@ print(xtable(summary_per_day_with_imputed2), type="html")
 ```
 
 <!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
-<!-- Mon Feb 16 22:32:37 2015 -->
+<!-- Fri Feb 20 17:28:35 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> date </th> <th> mean_steps </th> <th> median_steps </th>  </tr>
   <tr> <td align="right"> 1 </td> <td> 2012-10-01 </td> <td align="right"> 37.38 </td> <td align="right"> 34.11 </td> </tr>
@@ -315,4 +300,4 @@ library(lattice)
 xyplot(steps ~ interval | wkTm, data=df3, type="l")
 ```
 
-![](./PA1_template_files/figure-html/panelplot-1.png) 
+![plot of chunk panelplot](figure/panelplot-1.png) 
